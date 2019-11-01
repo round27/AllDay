@@ -1,0 +1,60 @@
+"""
+Number Data Type in Python
+=============================
+	Python supports integers, floating point numbers and complex numbers. 
+	They are defined as int, float and complex class in Python.
+	
+	We can use the type() function to know which class a variable or a 
+	value belongs to and isinstance() function to check if it belongs to a particular class.
+
+	Python Decimal
+	Python built-in class float performs some calculations that might amaze us. 
+	We all know that the sum of 1.1 and 2.2 is 3.3, but Python seems to disagree.
+"""
+from decimal import Decimal as D
+# Output: Decimal('3.3')
+print(D('1.1') + D('2.2'))
+
+# Output: Decimal('3.000')
+print(D('1.2') * D('2.50'))
+
+#Python Mathematics
+#Python offers modules like math and random to carry out different mathematics 
+#like trigonometry, logarithms, probability and statistics, etc.
+
+import math
+
+# Output: 3.141592653589793
+print(math.pi)
+
+# Output: -1.0
+print(math.cos(math.pi))
+
+# Output: 22026.465794806718
+print(math.exp(10))
+
+# Output: 3.0
+print(math.log10(1000))
+
+# Output: 1.1752011936438014
+print(math.sinh(1))
+
+# Output: 720
+print(math.factorial(6))
+
+import random
+
+# Output: 16
+print(random.randrange(10,20))
+
+x = ['a', 'b', 'c', 'd', 'e']
+# Get random choice
+print(random.choice(x))
+
+# Shuffle x
+random.shuffle(x)
+# Print the shuffled x
+print(x)
+
+# Print random element
+print(random.random())

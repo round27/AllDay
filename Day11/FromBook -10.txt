@@ -1,0 +1,116 @@
+10. Files and Exceptions
+==================================
+Python File Operation
+	What is a file?
+
+	File is a named location on disk to store related information. It is used to permanently 
+	store data in a non-volatile memory (e.g. hard disk).
+	Since, random access memory (RAM) is volatile which loses its data when 
+	computer is turned off, we use files for future use of the data.
+
+	Hence, in Python, a file operation takes place in the following order.
+
+		Open a file
+		Read or write (perform operation)
+		Close the file
+
+	How to open a file?
+	Python has a built-in function open() to open a file. This function returns a file object, 
+	also called a handle, as it is used to read or modify the file accordingly.
+
+	>>> f = open("test.txt")    # open file in current directory
+	>>> f = open("C:/Python33/README.txt")  # specifying full path
+
+	We can specify the mode while opening a file. In mode, we specify whether 
+	we want to read 'r', write 'w' or append 'a' to the file. We also specify 
+	if we want to open the file in text mode or binary mode.
+	
+	The default is reading in text mode. In this mode, we get strings when reading from the file.
+
+			Mode 	Description
+	'r' 	Open a file for reading. (default)
+	'w' 	Open a file for writing. Creates a new file if it does not exist or truncates the file if it exists.
+	'x' 	Open a file for exclusive creation. If the file already exists, the operation fails.
+	'a' 	Open for appending at the end of the file without truncating it. Creates a new file if it does not exist.
+	't' 	Open in text mode. (default)
+	'b' 	Open in binary mode.
+	'+' 	Open a file for updating (reading and writing)
+
+	f = open("test.txt")      # equivalent to 'r' or 'rt'
+	f = open("test.txt",'w')  # write in text mode
+	f = open("img.bmp",'r+b') # read and write in binary mode
+
+	Unlike other languages, the character 'a' does not imply the number 97 until 
+	it is encoded using ASCII (or other equivalent encodings).
+
+	Moreover, the default encoding is platform dependent. In windows, 
+	it is 'cp1252' but 'utf-8' in Linux.
+
+	f = open("test.txt",mode = 'r',encoding = 'utf-8')
+	
+	A safer way is to use a try...finally block.
+
+	try:
+	   f = open("test.txt",encoding = 'utf-8')
+	   # perform file operations
+	finally:
+	   f.close()
+
+	with open("test.txt",'w',encoding = 'utf-8') as f:
+   f.write("my first file\n")
+   f.write("This file\n\n")
+   f.write("contains three lines\n")
+
+	>>> for line in f:
+	...     print(line, end = '')
+	...
+	This is my first file
+	This file
+	contains three lines
+
+--------------------------------------------------		
+with open('pi_digits.txt') as file_object:
+    contents = file_object.read()
+    print(contents)
+
+Reading Line by Line
+--------------------------
+filename = 'pi_digits.txt'
+with open(filename) as file_object:
+    for line in file_object:
+       print(line)
+
+filename = 'pi_digits.txt'
+with open(filename) as file_object:
+     lines = file_object.readlines()
+for line in lines:
+    print(line.rstrip())
+
+writing to a file
+filename = 'programming.txt'
+
+ with open(filename, 'w') as file_object:
+     file_object.write("I love programming.")
+
+ with open(filename, 'a') as file_object:
+    file_object.write("I also love finding meaning in large datasets.\n")
+    file_object.write("I love creating apps that can run in a browser.\n")
+
+exceptions
+--------------------------------
+Using try-except Blocks
+
+try:
+    print(5/0)
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+
+
+Using json.dump() and json.load()
+import json
+
+ filename = 'numbers.json'
+ with open(filename) as f_obj:
+     numbers = json.load(f_obj)
+    
+print(numbers)
